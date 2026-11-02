@@ -12,10 +12,10 @@ d = ImageDraw.Draw(img)
 d.rectangle([0, 0, 1200, 14], fill=RED)
 d.rectangle([0, 560, 1200, 630], fill=NAVY)
 d.text((80, 90), "SAKENOTE LAB", font=ImageFont.truetype(BOLD, 34), fill=RED)
-f = ImageFont.truetype(BOLD, 64)
-for i, line in enumerate(["麹がラップする。", "杜氏が麻雀を打つ。", "お猪口が菰樽に育つ。"]):
-    d.text((80, 160 + i * 92), line, font=f, fill=NAVY)
-d.text((80, 470), "醸造とお酒の専門家がつくった、ゲームと知識ツール", font=ImageFont.truetype(MID, 32), fill=INK)
+f = ImageFont.truetype(BOLD, 96)
+# index.html の見出しと同じ文
+for i, line in enumerate(["さわる。", "あそぶ。", "まなぶ。"]):
+    d.text((80, 160 + i * 120), line, font=f, fill=NAVY)
 d.text((80, 578), "合同会社サケノテ", font=ImageFont.truetype(BOLD, 30), fill=(255, 255, 255))
 img.save(ROOT / "img" / "ogp.png", optimize=True)
 print("img/ogp.png")

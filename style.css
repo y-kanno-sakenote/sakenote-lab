@@ -73,9 +73,9 @@ img { max-width: 100%; height: auto; }
 .label-hero .en { position: relative; z-index: 1; background: var(--red); color: #fff; padding: 2px 8px; font-size: .66rem; letter-spacing: .16em; }
 .hero h1 {
   position: relative; z-index: 1;
-  writing-mode: vertical-rl; height: 10.8em; margin: 16px 0 0;
+  writing-mode: vertical-rl; height: 4.3em; margin: 16px 0 0; white-space: nowrap; /* 1行4字ぶんの高さ。折り返さない */
   font-family: var(--hero); font-weight: 800; color: var(--sumi);
-  font-size: clamp(1.4rem, 6.2vw, 2.2rem); line-height: 1.75; letter-spacing: .06em;
+  font-size: clamp(2.6rem, 12.2vw, 4rem); line-height: 1.5; letter-spacing: .06em; /* 幅360pxでラベル約264px・最大で約354px */
 }
 .plank { display: block; height: 12px; max-width: 420px; margin: 0 auto; }
 .lead { margin: 22px 0 18px; font-size: .95rem; }

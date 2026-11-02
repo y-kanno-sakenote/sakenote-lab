@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SAKENOTE LAB｜合同会社サケノテ</title>
-<!-- 本数は足すたびに古くなるので説明文にも入れない（ui 11-02） -->
-<meta name="description" content="醸造とお酒の専門家・合同会社サケノテがつくった、ゲームと知識ツール。ブラウザですぐ遊べます。">
+<meta name="description" content="醸造とお酒の専門家・合同会社サケノテがつくったものを、ひとつずつ並べます。ブラウザですぐ使えます。">
 <link rel="canonical" href="https://lab.sakenote.net/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SAKENOTE LAB">
 <meta property="og:title" content="SAKENOTE LAB｜合同会社サケノテ">
-<meta property="og:description" content="醸造とお酒の専門家がつくった、ゲームと知識ツール。ブラウザですぐ遊べます。">
+<meta property="og:description" content="醸造とお酒の専門家がつくったものを、ひとつずつ並べます。">
 <meta property="og:url" content="https://lab.sakenote.net/">
 <meta property="og:image" content="https://lab.sakenote.net/img/ogp.png">
 <meta property="og:locale" content="ja_JP">
@@ -31,138 +30,36 @@
 <section class="hero">
   <div class="label-hero">
     <p class="en">SAKENOTE LAB</p>
-    <h1>麹がラップする。<br>杜氏が麻雀を打つ。<br>お猪口が菰樽に育つ。</h1>
+    <!-- 縦書き。字数を変えたら style.css の .hero h1 の高さと字の大きさも合わせる -->
+    <h1>さわる。<br>あそぶ。<br>まなぶ。</h1>
   </div>
   <span class="plank" aria-hidden="true"></span>
-  <p class="lead">醸造とお酒の専門家がつくった、ゲームと知識ツール。<br>ブラウザですぐ遊べます。</p>
-  <!-- 扉は2つだけ。「新作で遊ぶ／全部見る」は置き換えた（新作は「あそぶ」の頭にある）。主役はあそぶ＝朱（ui 11-02） -->
-  <nav class="hero-btns" aria-label="入口">
-    <a class="btn btn-main" href="#asobu">あそぶ</a>
-    <a class="btn" href="#shiraberu">しらべる</a>
-  </nav>
 </section>
 
 <section id="asobu" class="block">
   <h2><span class="en">PLAY</span>あそぶ</h2>
-
-  <div class="bottle">
-    <!-- 見出しの「新作」を首掛け札にした（札と見出しの二重表示にしない） -->
-    <h3 class="kubikake">新作</h3>
-    <a class="card-big" href="https://y-kanno-sakenote.github.io/toji-mahjong/">
-      <span class="name pai v"><span class="r">杜氏</span><span class="n">麻雀</span></span>
-      <span class="copy">酒づくりの工程の牌で、CPU3人と4局。</span>
-      <span class="tags"><span class="tag tag-sp">スマホ向き</span></span>
-      <span class="play">遊ぶ ›</span>
+  <div class="cards">
+    <a class="card k-drop" href="sakedrop/">
+      <span class="face"><span class="name v"><span class="main">酒器</span><span class="sub">おとし</span></span></span>
+      <span class="fuda"><span class="copy">同じ酒器をくっつけて、お猪口から菰樽へ。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span></span>
     </a>
-  </div>
-
-  <div class="shelf">
-    <h3>醸造の仕事体験</h3>
-    <p class="shelf-note">蔵の仕事を、遊びの形でやってみる。</p>
-    <div class="cards">
-      <a class="card k-musou" href="https://y-kanno-sakenote.github.io/seishu-musou/">
-        <span class="face waku kado"><span class="name v foil">清酒無双</span></span>
-        <!-- カードの一行は「何をするか」の一文にそろえる。専門語・ゲーム語は出さない（ui 11-02） -->
-        <span class="fuda"><span class="copy">櫂棒で、雑菌の大群をなぎ倒す。</span></span>
-      </a>
-      <a class="card k-ondo" href="https://y-kanno-sakenote.github.io/nihonshu-sim-7daaaaed/">
-        <span class="face waku"><span class="name"><span class="main">米→酒</span><span class="band">杜氏の温度管理</span></span></span>
-        <span class="fuda"><span class="copy">もろみの温度を毎日決めて、お米を酒にする。</span></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="shelf">
-    <h3>カード・卓上</h3>
-    <p class="shelf-note">札と牌とサイコロで、醸造の言葉に触れる。</p>
-    <div class="cards">
-      <a class="card k-mahjong" href="https://y-kanno-sakenote.github.io/toji-mahjong/">
-        <span class="face"><span class="name pai v"><span class="r">杜氏</span><span class="n">麻雀</span></span></span>
-        <span class="fuda"><span class="copy">酒づくりの工程の牌で、CPU3人と4局。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span></span>
-      </a>
-      <a class="card k-soli" href="https://y-kanno-sakenote.github.io/toji-solitaire/">
-        <span class="face"><span class="name"><span class="main">杜氏</span><span class="sub">ソリティア</span></span></span>
-        <span class="fuda"><span class="copy">精米から貯蔵まで、13の工程を順にタンクへ。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span></span>
-      </a>
-      <a class="card k-jintori" href="https://y-kanno-sakenote.github.io/jozo-jintori/">
-        <span class="face"><span class="name v"><span class="sub">醸造百選の</span><span class="main">陣取り</span></span></span>
-        <!-- 「ひとりで」印は外し、ふたりで・みんなでだけ印に（ui 11-02・オーナー了承） -->
-        <span class="fuda"><span class="copy">醸造百選の品を集めて、県を自分の色に塗る。</span><span class="tags"><span class="tag">ふたりで</span><span class="tag">みんなで</span><span class="tag tag-sp">スマホ向き</span></span></span>
-      </a>
-      <a class="card k-koro" href="https://y-kanno-sakenote.github.io/kamokoro/">
-        <span class="face"><span class="name v">カモコロ</span></span>
-        <span class="fuda"><span class="copy">きょうかい酵母たちが、サイコロで1対1。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span></span>
-      </a>
-      <a class="card k-kyokan" href="https://y-kanno-sakenote.github.io/kyokanlab/">
-        <span class="face waku"><span class="name">キョーカン</span></span>
-        <span class="fuda"><span class="copy">同じものを味わって、感じた言葉がそろうかを試す。</span><span class="tags"><span class="tag">みんなで</span><span class="tag tag-sp">スマホ向き</span></span></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="shelf">
-    <h3>落ちもの・パズル</h3>
-    <p class="shelf-note">そろえて、くっつけて、育てる。</p>
-    <div class="cards">
-      <a class="card k-drop" href="https://y-kanno-sakenote.github.io/sake-drop/">
-        <span class="face"><span class="name v"><span class="main">酒器</span><span class="sub">おとし</span></span></span>
-        <span class="fuda"><span class="copy">同じ酒器をくっつけて、お猪口から菰樽へ。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span></span>
-      </a>
-      <a class="card k-pon" href="https://y-kanno-sakenote.github.io/kamoshite-pon/">
-        <span class="face waku"><span class="name"><span>かもして</span><span>ぽん！</span></span></span>
-        <span class="fuda"><span class="copy">3つそろえて醸し、しぼりどきを見きわめる。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="shelf">
-    <h3>ラップ</h3>
-    <p class="shelf-note">顔ぶれを選ぶと、韻のバトルが始まる。4本の入口は <a href="https://rap.sakenote.net/">rap.sakenote.net</a>。</p>
-    <div class="cards">
-      <a class="card k-rap r-jozo" href="https://jozorap.sakenote.net/">
-        <span class="face waku"><span class="name"><span class="w foil">醸造</span><span class="band">ラップバトル</span></span></span>
-        <span class="fuda"><span class="copy">麹菌・酵母・杜氏・乳酸菌・酒米が、韻で張り合う。</span></span>
-      </a>
-      <a class="card k-rap r-wine" href="https://y-kanno-sakenote.github.io/wine-rap-battle/">
-        <span class="face waku"><span class="name"><span class="w">ワイン</span><span class="band">ラップバトル</span></span></span>
-        <span class="fuda"><span class="copy">ブドウ5品種が、韻で張り合う。</span></span>
-      </a>
-      <a class="card k-rap r-shochu" href="https://y-kanno-sakenote.github.io/shochu-rap-battle/">
-        <span class="face waku"><span class="name"><span class="w">焼酎</span><span class="band">ラップバトル</span></span></span>
-        <span class="fuda"><span class="copy">芋・麦・米・黒糖・泡盛が、韻で張り合う。</span></span>
-      </a>
-      <a class="card k-rap r-chomi" href="https://y-kanno-sakenote.github.io/chomiryo-rap-battle/">
-        <span class="face waku"><span class="name"><span class="w foil">調味料</span><span class="band">ラップバトル</span></span></span>
-        <span class="fuda"><span class="copy">醤油・味噌・みりん・食酢・清酒が、韻で張り合う。</span></span>
-      </a>
-    </div>
   </div>
 </section>
 
 <section id="shiraberu" class="block block-dark">
   <h2><span class="en">LEARN</span>しらべる</h2>
-  <!-- 頁の下の一行＝出典と版。各公開ページの出典欄に書いてあることだけを写す。分からない版は書かない（ui 11-02） -->
+  <!-- 頁の下の一行＝出典と版。各公開ページの出典欄に書いてあることだけを写す。分からない版は書かない-->
   <div class="refs">
     <a class="ref k-book" href="jozo100/">
       <span class="face"><span class="name v"><span class="main">醸造百選</span><span class="sub sub-m">ビューア</span></span></span>
       <span class="leaf"><span class="copy">百選の品を、県の地図と50音で探す。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span><span class="src">日本醸造学会「醸造百選」（2026年10月6日発表）より。非公式です。</span></span>
-    </a>
-    <a class="ref k-keizu" href="https://y-kanno-sakenote.github.io/sakamai-keizu/">
-      <span class="face"><span class="name v">酒米の系図</span></span>
-      <span class="leaf"><span class="copy">酒米の親と子を、系図でたどる。</span><span class="tags"><span class="tag tag-sp">スマホ向き</span></span><span class="src">『酒米ハンドブック 改訂版』ほかより。数量は農林水産省の令和7年産速報値。</span></span>
-    </a>
-    <!-- 酒縁結びは「お酒と出会う」道具なので端に置く。版の日付は公開ページに無いので書かない -->
-    <a class="ref k-en" href="https://y-kanno-sakenote.github.io/sake-enmusubi/">
-      <span class="face waku"><span class="name v">酒縁結び</span></span>
-      <span class="leaf"><span class="copy">推しや大切な人を描くと、縁のある酒蔵を結ぶ。</span><span class="src">日本酒造組合中央会「組合員名簿」・各県酒造組合・各蔵公式サイトより。</span></span>
     </a>
   </div>
 </section>
 
 <section class="block about">
   <h2><span class="en">ABOUT</span>サケノテについて</h2>
-  <p>合同会社サケノテは、日本酒業界に特化した会社です。コンサルティングや商品開発のお手伝い、日本酒の魅力の発信をしています。ここに並べたのは、醸造の知識を遊びと道具の形にしたものです。</p>
-  <!-- 会社へ戻る道は上の帯とフッターにあるので、ここのボタンは外した（ui 11-02） -->
+  <p>合同会社サケノテは、日本酒業界に特化した会社です。コンサルティングや商品開発のお手伝い、日本酒の魅力の発信をしています。ここに並べるのは、醸造の知識を形にしたものです。</p>
 
   <div class="share">
     <p class="share-ttl">このページを送る</p>
