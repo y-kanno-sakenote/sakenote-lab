@@ -1,0 +1,5 @@
+.DS_Store
+.claude/
+# 設計メモは公開しない（このリポがそのまま公開物）
+CLAUDE.md
+docs/

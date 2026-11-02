@@ -1,0 +1,128 @@
+/* 色は会社サイト sakenote.net の styles.css から拾った値（2026-11-02） */
+:root {
+  --red: #C1392C;      /* ロゴ・見出しの赤 */
+  --red-2: #CD4633;    /* 赤の明るい方 */
+  --navy: #10165B;     /* 紺（帯・フッター） */
+  --ink: #252525;      /* 本文 */
+  --gray: #F2F2F2;     /* 地の灰 */
+  --line: #EDEDED;     /* 罫 */
+  --white: #ffffff;
+  --muted: #6b6b6b;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: "Zen Maru Gothic", "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-weight: 500;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+a { color: var(--red); }
+img { max-width: 100%; height: auto; }
+
+/* 上の帯 */
+.site-head {
+  border-top: 4px solid var(--red);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 16px;
+}
+.back {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--ink); text-decoration: none; font-size: 1.1rem;
+}
+.back img { width: 150px; height: auto; display: block; }
+
+
+.en {
+  display: block;
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  letter-spacing: .12em; font-size: .78rem; color: var(--red);
+}
+
+/* 一番上 */
+.hero { padding: 40px 16px 32px; text-align: center; max-width: 960px; margin: 0 auto; }
+.hero h1 {
+  font-weight: 700; font-size: clamp(1.5rem, 6vw, 2.3rem);
+  line-height: 1.5; margin: 8px 0 16px; color: var(--navy);
+}
+.lead { margin: 0 0 24px; font-size: .95rem; }
+.hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+/* ボタン（会社サイトに合わせたピル型） */
+.btn {
+  display: inline-block; padding: 10px 22px;
+  border: 1.5px solid var(--red); border-radius: 30px;
+  background: var(--white); color: var(--red);
+  font: inherit; font-weight: 700; font-size: .95rem;
+  text-decoration: none; cursor: pointer;
+}
+.btn:hover, .btn:focus-visible { background: var(--red); color: var(--white); }
+.btn-main { background: var(--red); color: var(--white); }
+.btn-main:hover, .btn-main:focus-visible { background: var(--red-2); border-color: var(--red-2); }
+
+/* 区切り */
+.block { padding: 36px max(16px, calc((100% - 960px) / 2)); }
+.block-gray { background: var(--gray); }
+h2 { font-size: 1.35rem; margin: 0 0 18px; color: var(--navy); font-weight: 700; }
+h3 { font-size: 1.05rem; margin: 0 0 4px; color: var(--navy); }
+
+/* カード */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.card {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 14px 16px; background: var(--white);
+  border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: 8px;
+  color: var(--ink); text-decoration: none;
+}
+.card:hover, .card:focus-visible { border-color: var(--red); }
+.card .name { font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+.card .copy { font-size: .9rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tag {
+  font-size: .75rem; padding: 1px 10px; border-radius: 30px;
+  background: var(--gray); color: var(--ink); border: 1px solid var(--line);
+}
+.tag-sp { background: var(--white); color: var(--navy); border-color: var(--navy); }
+
+/* 新作の大きいカード */
+.card-big { padding: 24px 20px; border-left-width: 6px; gap: 8px; }
+.card-big .name { font-size: 1.6rem; }
+.card-big .copy { font-size: 1rem; }
+.new-mark {
+  align-self: flex-start; font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: .75rem; letter-spacing: .1em; color: var(--white); background: var(--red);
+  padding: 2px 10px; border-radius: 30px;
+}
+.play { align-self: flex-start; margin-top: 8px; font-weight: 700; color: var(--white); background: var(--red); padding: 8px 22px; border-radius: 30px; }
+
+/* だれと */
+.who { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px; }
+.who-box { background: var(--white); border-radius: 8px; padding: 16px; border: 1px solid var(--line); }
+.who-box ul { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.who-box li a {
+  display: inline-block; padding: 4px 14px; border-radius: 30px;
+  border: 1px solid var(--red); text-decoration: none; font-size: .9rem;
+}
+.who-box small { font-size: .75rem; color: var(--muted); margin-left: 2px; }
+
+/* 棚 */
+.shelf + .shelf { margin-top: 28px; }
+.shelf h3 { border-left: 4px solid var(--red); padding-left: 10px; }
+.shelf-note { margin: 0 0 12px; font-size: .88rem; color: var(--muted); }
+
+/* 紹介と共有 */
+.about p { margin: 0 0 16px; }
+.share { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+.share-ttl { font-weight: 700; margin: 0 0 10px; }
+.share-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.copied { min-height: 1.5em; font-size: .85rem; color: var(--muted); margin: 8px 0 0; }
+
+/* フッター */
+.site-foot { background: var(--navy); color: var(--white); text-align: center; padding: 24px 16px 32px; }
+.site-foot p { margin: 0 0 8px; font-size: .88rem; }
+.site-foot a { color: var(--white); }
+.legal { font-weight: 700; }
