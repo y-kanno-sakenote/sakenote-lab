@@ -11,7 +11,7 @@ img = Image.new("RGB", (1200, 630), (255, 255, 255))
 d = ImageDraw.Draw(img)
 d.rectangle([0, 0, 1200, 14], fill=RED)
 d.rectangle([0, 560, 1200, 630], fill=NAVY)
-d.text((80, 90), "SAKENOTE CONTENTS", font=ImageFont.truetype(BOLD, 34), fill=RED)
+d.text((80, 90), "SAKENOTE LAB", font=ImageFont.truetype(BOLD, 34), fill=RED)
 f = ImageFont.truetype(BOLD, 64)
 for i, line in enumerate(["麹がラップする。", "杜氏が麻雀を打つ。", "お猪口が菰樽に育つ。"]):
     d.text((80, 160 + i * 92), line, font=f, fill=NAVY)

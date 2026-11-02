@@ -1,128 +1,369 @@
-/* 色は会社サイト sakenote.net の styles.css から拾った値（2026-11-02） */
+/* SAKENOTE LAB の見た目（design/b2.html「酒ラベル・作り込み」を本体へ移したもの・2026-11-02 オーナー決定）
+   赤・紺は会社サイト sakenote.net の値。外部画像なし（CSS とインラインSVGのデータだけ） */
 :root {
-  --red: #C1392C;      /* ロゴ・見出しの赤 */
-  --red-2: #CD4633;    /* 赤の明るい方 */
-  --navy: #10165B;     /* 紺（帯・フッター） */
-  --ink: #252525;      /* 本文 */
-  --gray: #F2F2F2;     /* 地の灰 */
-  --line: #EDEDED;     /* 罫 */
-  --white: #ffffff;
-  --muted: #6b6b6b;
-}
+  --red: #C1392C; --red-2: #CD4633; --navy: #10165B;
+  --sumi: #232220; --ink: #252525; --muted: #5d574c;
+  --washi: #F7F2E6; --kinari: #FBF6E9; --torinoko: #EADBB8;
+  --wood: #9A6A43; --wood-d: #6B4527; --line: #DED4BF;
+  --kin: #C9A75A;                                   /* 金（平） */
+  --kin-g: linear-gradient(115deg, #a8843c 0%, #f1dc9c 26%, #b8913f 44%, #f7e9b8 60%, #a98238 80%, #e2c67e 100%); /* 箔 */
+  --felt: #24493D; --ai: #1F3163;
+  --mincho: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+  --fude: "Yuji Syuku", var(--mincho);
+  --hero: "Shippori Mincho B1", var(--mincho);
 
+  /* 和紙：長い繊維＋細かい粒（明るい地用 / 暗い地用）。どのラベルもこの2枚を使い回す */
+  --fiber: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.004 .12' numOctaves='3' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .46 0 0 0 0 .36 0 0 0 0 .22 0 0 0 -14 6'/><feComponentTransfer><feFuncA type='linear' slope='.3'/></feComponentTransfer></filter><rect width='260' height='260' filter='url(%23f)'/></svg>");
+  --grain: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='9' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4 0 0 0 0 .32 0 0 0 0 .2 0 0 0 -16 7.4'/><feComponentTransfer><feFuncA type='linear' slope='.22'/></feComponentTransfer></filter><rect width='180' height='180' filter='url(%23g)'/></svg>");
+  --fiber-l: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.004 .12' numOctaves='3' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .98 0 0 0 0 .95 0 0 0 0 .86 0 0 0 -14 6'/><feComponentTransfer><feFuncA type='linear' slope='.16'/></feComponentTransfer></filter><rect width='260' height='260' filter='url(%23f)'/></svg>");
+  /* 朱印のかすれ（生成りの点を朱の上に散らす） */
+  --kasure: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='k'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .98 0 0 0 0 .96 0 0 0 0 .9 0 0 0 -18 8.3'/><feComponentTransfer><feFuncA type='linear' slope='.7'/></feComponentTransfer></filter><rect width='120' height='120' filter='url(%23k)'/></svg>");
+  /* 牌を並べた地紋（杜氏麻雀の2枚で使い回す） */
+  --tilegrid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='32'><rect x='3' y='3' width='18' height='26' rx='3' fill='none' stroke='%23F7F2E6' stroke-opacity='.11'/></svg>");
+}
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0;
-  background: var(--white);
-  color: var(--ink);
-  font-family: "Zen Maru Gothic", "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-  font-weight: 500;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
+  margin: 0; color: var(--ink);
+  background-color: var(--washi);
+  background-image: var(--fiber), var(--grain);
+  background-size: 260px 260px, 180px 180px;
+  font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  font-weight: 500; line-height: 1.75; overflow-wrap: anywhere;
 }
 a { color: var(--red); }
 img { max-width: 100%; height: auto; }
 
-/* 上の帯 */
-.site-head {
-  border-top: 4px solid var(--red);
-  border-bottom: 1px solid var(--line);
-  padding: 12px 16px;
-}
-.back {
-  display: inline-flex; align-items: center; gap: 6px;
-  color: var(--ink); text-decoration: none; font-size: 1.1rem;
-}
+.site-head { padding: 6px 16px; border-bottom: 1px solid var(--line); background: var(--kinari); }
+.back { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--ink); text-decoration: none; font-size: 1.1rem; } /* ロゴだけだと28pxで指に小さい */
 .back img { width: 150px; height: auto; display: block; }
 
+.en { display: block; font-family: "Poppins", sans-serif; font-weight: 600; letter-spacing: .14em; font-size: .74rem; color: var(--red); }
 
-.en {
-  display: block;
-  font-family: "Poppins", sans-serif; font-weight: 600;
-  letter-spacing: .12em; font-size: .78rem; color: var(--red);
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .cards .face .foil { background-image: var(--kin-g); -webkit-background-clip: text; background-clip: text; color: transparent; } /* 各ラベルの文字色より強く */
 }
 
-/* 一番上 */
-.hero { padding: 40px 16px 32px; text-align: center; max-width: 960px; margin: 0 auto; }
+/* 棚板（木目） */
+.plank, .cards .card::after, .card-big::after {
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,.07) 0 1px, transparent 1px 29px, rgba(255,255,255,.06) 29px 30px, transparent 30px 47px), linear-gradient(#b0805a, var(--wood-d));
+  box-shadow: 0 4px 4px rgba(0,0,0,.14); border-radius: 1px;
+}
+
+/* ===== 一番上：大きな1枚のラベル（和紙・金の二重罫・隅金具） ===== */
+.hero { padding: 32px 16px 28px; text-align: center; }
+.label-hero {
+  position: relative; display: inline-flex; flex-direction: column; align-items: center;
+  padding: 24px 32px 26px;
+  background-color: var(--kinari); background-image: var(--fiber), var(--grain);
+  background-size: 260px 260px, 180px 180px;
+  border: 1px solid var(--sumi); box-shadow: 0 3px 0 rgba(0,0,0,.06);
+}
+.label-hero::before { content: ""; position: absolute; inset: 6px; border: 1px solid var(--kin); box-shadow: inset 0 0 0 3px var(--kinari), inset 0 0 0 4px var(--kin); pointer-events: none; }
+.label-hero::after, .kado::after {
+  content: ""; position: absolute; inset: var(--kado-in, 13px); pointer-events: none;
+  --c: var(--kado-c, var(--kin));
+  background:
+    linear-gradient(var(--c), var(--c)) 0 0 / 14px 2px, linear-gradient(var(--c), var(--c)) 0 0 / 2px 14px,
+    linear-gradient(var(--c), var(--c)) 100% 0 / 14px 2px, linear-gradient(var(--c), var(--c)) 100% 0 / 2px 14px,
+    linear-gradient(var(--c), var(--c)) 0 100% / 14px 2px, linear-gradient(var(--c), var(--c)) 0 100% / 2px 14px,
+    linear-gradient(var(--c), var(--c)) 100% 100% / 14px 2px, linear-gradient(var(--c), var(--c)) 100% 100% / 2px 14px;
+  background-repeat: no-repeat;
+}
+.label-hero .en { position: relative; z-index: 1; background: var(--red); color: #fff; padding: 2px 8px; font-size: .66rem; letter-spacing: .16em; }
 .hero h1 {
-  font-weight: 700; font-size: clamp(1.5rem, 6vw, 2.3rem);
-  line-height: 1.5; margin: 8px 0 16px; color: var(--navy);
+  position: relative; z-index: 1;
+  writing-mode: vertical-rl; height: 10.8em; margin: 16px 0 0;
+  font-family: var(--hero); font-weight: 800; color: var(--sumi);
+  font-size: clamp(1.4rem, 6.2vw, 2.2rem); line-height: 1.75; letter-spacing: .06em;
 }
-.lead { margin: 0 0 24px; font-size: .95rem; }
+.plank { display: block; height: 12px; max-width: 420px; margin: 0 auto; }
+.lead { margin: 22px 0 18px; font-size: .95rem; }
 .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
-/* ボタン（会社サイトに合わせたピル型） */
+/* ボタン：角の立った札 */
 .btn {
-  display: inline-block; padding: 10px 22px;
-  border: 1.5px solid var(--red); border-radius: 30px;
-  background: var(--white); color: var(--red);
-  font: inherit; font-weight: 700; font-size: .95rem;
+  display: inline-flex; align-items: center; justify-content: center; min-height: 46px;
+  padding: 8px 22px; border: 1.5px solid var(--sumi); border-radius: 2px;
+  background: var(--kinari); color: var(--sumi);
+  font: inherit; font-weight: 700; font-size: .95rem; letter-spacing: .04em;
   text-decoration: none; cursor: pointer;
 }
-.btn:hover, .btn:focus-visible { background: var(--red); color: var(--white); }
-.btn-main { background: var(--red); color: var(--white); }
+.btn:hover, .btn:focus-visible { background: var(--sumi); color: var(--kinari); }
+.btn-main { background: var(--red); border-color: var(--red); color: #fff; box-shadow: inset 0 0 0 2px var(--red), inset 0 0 0 3px rgba(255,255,255,.6); }
 .btn-main:hover, .btn-main:focus-visible { background: var(--red-2); border-color: var(--red-2); }
+.hero-btns .btn { min-width: 8.5em; font-size: 1.05rem; letter-spacing: .12em; } /* 扉の2つは同じ幅に */
 
 /* 区切り */
-.block { padding: 36px max(16px, calc((100% - 960px) / 2)); }
-.block-gray { background: var(--gray); }
-h2 { font-size: 1.35rem; margin: 0 0 18px; color: var(--navy); font-weight: 700; }
-h3 { font-size: 1.05rem; margin: 0 0 4px; color: var(--navy); }
+.block { padding: 32px max(16px, calc((100% - 960px) / 2)); }
+.block-dark { background-color: rgba(214, 196, 158, .28); }
+h2 { font-family: var(--fude); font-weight: 400; font-size: 1.6rem; line-height: 1.4; margin: 0 0 18px; color: var(--sumi); letter-spacing: .06em; }
 
-/* カード */
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
-.card {
-  display: flex; flex-direction: column; gap: 4px;
-  padding: 14px 16px; background: var(--white);
-  border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: 8px;
+/* 棚の名前＝朱印（白抜きの文字・内側に細い罫・かすれ） */
+.shelf + .shelf { margin-top: 30px; }
+.shelf h3 {
+  position: relative; display: inline-block; margin: 0 0 8px; padding: 4px 13px 3px;
+  background: var(--red); color: var(--kinari); border-radius: 4px;
+  font-family: var(--fude); font-weight: 400; font-size: 1.1rem; line-height: 1.5; letter-spacing: .12em;
+  box-shadow: inset 0 0 0 2px var(--red), inset 0 0 0 3px rgba(251,246,233,.85);
+  transform: rotate(-1.5deg);
+}
+.shelf h3::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background-image: var(--kasure); background-size: 120px 120px; pointer-events: none; }
+.shelf-note { margin: 0 0 14px; font-size: .88rem; color: var(--muted); }
+.shelf-note a { display: inline-block; padding: 12px 4px; margin: -12px -4px; }
+
+/* ===== 棚のラベル：上＝ラベル面（1本ごとに意匠が違う）、下＝白い棚札（一行と印） ===== */
+.cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(146px, 1fr));
+  column-gap: 0; row-gap: 32px; padding-bottom: 14px;
+}
+.cards .card {
+  position: relative; margin: 0 6px; min-height: 44px;
+  display: grid; grid-template-rows: 140px 1fr; row-gap: 6px;
   color: var(--ink); text-decoration: none;
 }
-.card:hover, .card:focus-visible { border-color: var(--red); }
-.card .name { font-weight: 700; font-size: 1.05rem; color: var(--navy); }
-.card .copy { font-size: .9rem; }
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-.tag {
-  font-size: .75rem; padding: 1px 10px; border-radius: 30px;
-  background: var(--gray); color: var(--ink); border: 1px solid var(--line);
-}
-.tag-sp { background: var(--white); color: var(--navy); border-color: var(--navy); }
+.cards .card::after { content: ""; position: absolute; left: -7px; right: -7px; bottom: -15px; height: 10px; }
+.cards .card:hover, .cards .card:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
 
-/* 新作の大きいカード */
-.card-big { padding: 24px 20px; border-left-width: 6px; gap: 8px; }
-.card-big .name { font-size: 1.6rem; }
-.card-big .copy { font-size: 1rem; }
-.new-mark {
-  align-self: flex-start; font-family: "Poppins", sans-serif; font-weight: 600;
-  font-size: .75rem; letter-spacing: .1em; color: var(--white); background: var(--red);
-  padding: 2px 10px; border-radius: 30px;
+.face {
+  --motif: none; --msize: auto; --mrep: no-repeat; --mpos: center; --fib: var(--fiber);
+  position: relative; display: grid; place-items: center; height: 140px; overflow: hidden;
+  background-color: var(--kinari); color: var(--sumi);
+  background-image: var(--motif), var(--fib), var(--grain);
+  background-size: var(--msize), 260px 260px, 180px 180px;
+  background-repeat: var(--mrep), repeat, repeat;
+  background-position: var(--mpos), 0 0, 0 0;
+  border: 1px solid rgba(0,0,0,.55); box-shadow: 0 2px 0 rgba(0,0,0,.06);
 }
-.play { align-self: flex-start; margin-top: 8px; font-weight: 700; color: var(--white); background: var(--red); padding: 8px 22px; border-radius: 30px; }
+.face > * { grid-area: 1 / 1; }
+.waku::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--rule, var(--kin)); pointer-events: none; }
+.name { position: relative; z-index: 1; font-family: var(--fude); font-weight: 400; line-height: 1.15; letter-spacing: .04em; text-align: center; }
+.v { writing-mode: vertical-rl; }
+.v > span { display: block; }
+.sub-m { font-family: var(--mincho); font-weight: 600; }
 
-/* だれと */
-.who { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px; }
-.who-box { background: var(--white); border-radius: 8px; padding: 16px; border: 1px solid var(--line); }
-.who-box ul { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
-.who-box li a {
-  display: inline-block; padding: 4px 14px; border-radius: 30px;
-  border: 1px solid var(--red); text-decoration: none; font-size: .9rem;
+.fuda { display: flex; flex-direction: column; gap: 6px; background: #fff; border: 1px solid rgba(0,0,0,.4); padding: 7px 9px 8px; }
+.copy { font-size: .8rem; line-height: 1.6; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { font-size: .75rem; line-height: 1.6; padding: 0 5px; border: 1px solid var(--sumi); border-radius: 1px; color: var(--sumi); }
+.tag-sp { background: var(--sumi); color: #fff; }
+
+/* 清酒無双：紺地に交差した2本の櫂・金箔の名前 */
+.k-musou .face {
+  background-color: var(--navy); --fib: var(--fiber-l); border-color: #000; --rule: rgba(201,167,90,.6); --kado-in: 10px;
+  --motif: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><g fill='%23C9A75A' stroke='%23C9A75A' stroke-linecap='round' opacity='.4'><line x1='22' y1='14' x2='120' y2='126' stroke-width='3.5'/><line x1='128' y1='14' x2='30' y2='126' stroke-width='3.5'/><rect x='104' y='121' width='32' height='10' rx='1.5' stroke='none' transform='rotate(-41 120 126)'/><rect x='14' y='121' width='32' height='10' rx='1.5' stroke='none' transform='rotate(41 30 126)'/></g></svg>");
+  --msize: auto 100%;
 }
-.who-box small { font-size: .75rem; color: var(--muted); margin-left: 2px; }
+.k-musou .name { font-size: 1.85rem; letter-spacing: .1em; color: #E6CF8E; filter: drop-shadow(0 1px 0 rgba(0,0,0,.6)); }
 
-/* 棚 */
-.shelf + .shelf { margin-top: 28px; }
-.shelf h3 { border-left: 4px solid var(--red); padding-left: 10px; }
-.shelf-note { margin: 0 0 12px; font-size: .88rem; color: var(--muted); }
+/* 米→酒：左に温度計の目盛り・名前は横書きの2段（大きな「米→酒」＋紺の帯） */
+.k-ondo .face {
+  --rule: rgba(16,22,91,.5);
+  --motif: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='140'><path d='M19 18h9M19 26h5M19 34h9M19 42h5M19 50h9M19 58h5M19 66h9M19 74h5M19 82h9M19 90h5M19 98h9M19 106h5M19 114h9' stroke='%23232220' stroke-width='1'/><rect x='9' y='14' width='7' height='104' rx='3.5' fill='%23fff' stroke='%23232220' stroke-width='.9'/><rect x='11' y='58' width='3' height='64' fill='%23C1392C'/><circle cx='12.5' cy='123' r='7' fill='%23C1392C' stroke='%23232220' stroke-width='.9'/></svg>");
+  --msize: 40px 140px; --mpos: 6px 0;
+}
+.k-ondo .name { margin-left: 30px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.k-ondo .main { font-size: 1.9rem; line-height: 1; }
+.k-ondo .band { background: var(--navy); color: var(--kinari); font-size: .85rem; line-height: 1.5; letter-spacing: 0; padding: 2px 5px; }
+
+/* 杜氏麻雀：雀卓の緑に牌の地紋・名前は1枚の牌（紅と藍の字） */
+.k-mahjong .face { background-color: var(--felt); --fib: var(--fiber-l); border-color: #000; --motif: var(--tilegrid); --msize: 24px 32px; --mrep: repeat; --mpos: 0 0; }
+.pai {
+  background: #FBF7EC; border-radius: 8px; padding: 18px 10px; line-height: 1.05; letter-spacing: .08em;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.3), 0 5px 0 var(--navy), 0 5px 0 1px rgba(0,0,0,.35), 0 9px 8px rgba(0,0,0,.25);
+}
+.pai .r { color: var(--red); } .pai .n { color: var(--navy); }
+.k-mahjong .pai { font-size: 1.6rem; margin-top: -4px; }
+
+/* 杜氏ソリティア：藍染の鹿の子に、札が段々に重なる */
+.k-soli .face { background-color: var(--ai); --fib: var(--fiber-l); border-color: #000; --motif: radial-gradient(circle, rgba(255,255,255,.14) 1.2px, transparent 1.9px); --msize: 9px 9px; --mrep: repeat; --mpos: 0 0; }
+.k-soli .name {
+  margin-top: 22px; min-width: 104px; padding: 12px 8px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: #FBF7EC; color: var(--sumi); border: 1px solid #1b1b1b; border-radius: 5px;
+  box-shadow: 0 -11px 0 -1px #EFE5CC, 0 -11px 0 0 #1b1b1b, 0 -22px 0 -1px #E2D5B5, 0 -22px 0 0 #1b1b1b, 0 4px 6px rgba(0,0,0,.3);
+}
+.k-soli .main { font-size: 1.75rem; line-height: 1.1; color: var(--ai); }
+.k-soli .sub { font-size: 1.05rem; letter-spacing: .02em; }
+
+/* 醸造百選の陣取り：県の六角の地図の地紋（ところどころ朱と紺に塗られている）＋題簽 */
+.k-jintori .face {
+  --motif:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><defs><path id='h' d='M0-10 8.66-5V5L0 10-8.66 5V-5Z'/></defs><g fill='%23C1392C' fill-opacity='.55'><use href='%23h' x='112.58' y='15'/><use href='%23h' x='129.9' y='15'/><use href='%23h' x='121.24' y='30'/></g><g fill='%2310165B' fill-opacity='.5'><use href='%23h' x='17.32' y='120'/><use href='%23h' x='34.64' y='120'/><use href='%23h' x='8.66' y='135'/><use href='%23h' x='25.98' y='135'/></g></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='17.32' height='30' viewBox='0 0 17.32 30'><path d='M8.66 5 17.32 10V20L8.66 25 0 20V10ZM8.66 0V5M8.66 25V30' fill='none' stroke='%2310165B' stroke-opacity='.22' stroke-width='.8'/></svg>");
+  --msize: 150px 150px, 17.32px 30px; --mrep: no-repeat, repeat; --mpos: 0 0, 0 0;
+}
+.k-jintori .name { padding: 8px 7px; background: var(--kinari); border: 1px solid rgba(16,22,91,.55); box-shadow: inset 0 0 0 2px var(--kinari), inset 0 0 0 3px rgba(193,57,44,.5); }
+.k-jintori .sub { font-size: .95rem; letter-spacing: .02em; }
+.k-jintori .main { font-size: 1.75rem; line-height: 1.05; padding-top: 6px; }
+
+/* カモコロ：サイコロの面（四隅の目）・真ん中に名前 */
+.k-koro .face {
+  width: 132px; height: 132px; margin: 4px auto; justify-self: center; border-radius: 18px;
+  background-color: #FFFDF8; border-color: rgba(0,0,0,.45);
+  box-shadow: inset -3px -4px 0 rgba(0,0,0,.07), 0 2px 0 rgba(0,0,0,.1);
+  --motif: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='132' height='132'><g fill='%2310165B'><circle cx='30' cy='30' r='9'/><circle cx='102' cy='30' r='9'/><circle cx='30' cy='102' r='9'/><circle cx='102' cy='102' r='9'/></g></svg>");
+  --msize: 100% 100%;
+}
+.k-koro .name { font-size: 1.55rem; color: var(--red); letter-spacing: .02em; }
+
+/* キョーカン：言葉の吹き出しが重なる */
+.k-kyokan .face {
+  background-color: var(--torinoko); --rule: rgba(35,34,32,.35);
+  --motif: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='140'><g fill='none' stroke-width='1.5' stroke-opacity='.6' stroke-linejoin='round'><g stroke='%23C1392C'><ellipse cx='42' cy='28' rx='30' ry='17'/><path d='M54 43 64 54 46 44'/></g><g stroke='%2310165B'><ellipse cx='108' cy='112' rx='30' ry='17'/><path d='M96 97 86 86 104 96'/></g></g></svg>");
+  --msize: auto 100%;
+}
+.k-kyokan .name { padding: 13px 14px; font-size: 1.3rem; letter-spacing: .02em; background: var(--kinari); border: 1.5px solid var(--sumi); border-radius: 50%; }
+.k-kyokan .name::after { content: ""; position: absolute; left: 30%; bottom: -7px; width: 12px; height: 12px; background: var(--kinari); border-right: 1.5px solid var(--sumi); border-bottom: 1.5px solid var(--sumi); transform: rotate(45deg); }
+
+/* 酒器おとし：盃の形の丸ラベル（蛇の目の紺の輪） */
+.k-drop .face {
+  width: 136px; height: 136px; margin: 2px auto; justify-self: center; border-radius: 50%;
+  background-color: #FFFDF8; border-color: rgba(0,0,0,.4);
+  --motif: radial-gradient(circle closest-side, transparent 0 75.5%, var(--navy) 76% 87%, transparent 87.5%);
+  --msize: 100% 100%;
+}
+.k-drop .name { color: var(--navy); }
+.k-drop .main { font-size: 1.75rem; }
+.k-drop .sub { font-size: 1.3rem; padding-top: 14px; }
+
+/* かもしてぽん！：朱の地に3つ並んだ粒・横書き2段 */
+.k-pon .face {
+  background-color: var(--red); --fib: var(--fiber-l); border-color: #7a1f16; --rule: rgba(255,255,255,.55);
+  --motif:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='66' height='24'><g stroke='%237A1F16' stroke-width='.8'><ellipse cx='11' cy='12' rx='6' ry='9' fill='%23fff' transform='rotate(-14 11 12)'/><ellipse cx='33' cy='12' rx='6' ry='9' fill='%23FBF6E9'/><ellipse cx='55' cy='12' rx='6' ry='9' fill='%23E9D396' transform='rotate(14 55 12)'/></g></svg>"),
+    radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1.6px);
+  --msize: 66px 24px, 10px 10px; --mpos: 50% 16px, 0 0; --mrep: no-repeat, repeat;
+}
+.k-pon .name { margin-top: 26px; font-size: 1.5rem; line-height: 1.2; color: #fff; }
+.k-pon .name > span { display: block; }
+
+/* ラップ4本：太い帯の派手なラベル（大きな一語＋斜めの帯「ラップバトル」・金の縁） */
+.k-rap .face {
+  background-color: var(--g); --fib: var(--fiber-l); border-color: #000; --rule: rgba(201,167,90,.55);
+  --motif: repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 2px, transparent 2px 8px);
+  --mrep: repeat;
+}
+.k-rap .name { justify-self: stretch; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.k-rap .w { font-size: 2.3rem; line-height: 1; letter-spacing: .06em; color: var(--w); }
+.k-rap .band {
+  align-self: stretch; margin: 0 -16px; padding: 4px 0 5px;
+  background: var(--b); color: var(--bt);
+  font-family: "Zen Maru Gothic", sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: .14em;
+  box-shadow: 0 -3px 0 var(--kin), 0 3px 0 var(--kin), 0 7px 0 rgba(0,0,0,.25);
+  transform: rotate(-5deg);
+}
+.r-jozo   { --g: #232220; --b: var(--red); --bt: #fff;    --w: #E6CF8E; }
+.r-wine   { --g: #5A1A2B; --b: #E7A3AE; --bt: #4A1322; --w: #F4CFD5; }
+.r-shochu { --g: #8A5A3B; --b: #233A6B; --bt: #FBF6E9; --w: #FBF6E9; }
+.r-chomi  { --g: #3A2016; --b: #006E54; --bt: #fff;    --w: #E6CF8E; }
+.r-chomi .face { --motif: conic-gradient(rgba(255,255,255,.07) 25%, transparent 0 50%, rgba(255,255,255,.07) 0 75%, transparent 0); --msize: 14px 14px; } /* 城下町の市松 */
+
+/* ===== 新作＝大きなラベル＋瓶の首に掛ける札（「新作」は札そのもの。札と見出しの二重表示にしない） ===== */
+.bottle { position: relative; max-width: 560px; margin: 44px auto 48px; }
+.kubikake {
+  position: absolute; z-index: 2; top: -16px; left: 22px; margin: 0;
+  width: 42px; padding: 16px 0 12px; display: flex; justify-content: center;
+  background-color: var(--kinari); background-image: var(--fiber), var(--grain);
+  border: 1px solid var(--red); border-radius: 3px;
+  box-shadow: inset 0 0 0 3px var(--kinari), inset 0 0 0 4px var(--red), 0 3px 6px rgba(0,0,0,.28);
+  color: var(--red); font-family: var(--fude); font-weight: 400; font-size: 1.35rem; line-height: 1; letter-spacing: .12em;
+  writing-mode: vertical-rl; transform: rotate(-4deg); transform-origin: 50% 0; pointer-events: none;
+}
+.kubikake::before { content: ""; position: absolute; left: 50%; top: -22px; width: 24px; height: 30px; margin-left: -12px; border: 2px solid var(--kin); border-bottom: 0; border-radius: 12px 12px 0 0; } /* 掛け紐 */
+.kubikake::after { content: ""; position: absolute; left: 50%; top: 6px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: rgba(0,0,0,.55); } /* 紐の穴 */
+
+.card-big {
+  position: relative; display: grid; grid-template-columns: 1fr auto; grid-template-rows: 1fr auto auto;
+  column-gap: 16px; row-gap: 10px; min-height: 250px; padding: 24px 20px 22px;
+  background-color: var(--felt); background-image: var(--tilegrid), var(--fiber-l), var(--grain);
+  background-size: 24px 32px, 260px 260px, 180px 180px;
+  color: #F7F2E6; text-decoration: none; border: 1px solid #000;
+  box-shadow: inset 0 0 0 6px var(--felt), inset 0 0 0 7px rgba(201,167,90,.85), inset 0 0 0 10px var(--felt), inset 0 0 0 11px rgba(201,167,90,.45);
+}
+.card-big::after { content: ""; position: absolute; left: -8px; right: -8px; bottom: -17px; height: 12px; }
+.card-big:hover, .card-big:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.card-big .pai { grid-area: 1 / 2 / 4 / 3; align-self: center; font-family: var(--fude); font-size: 2.2rem; padding: 22px 12px; }
+.card-big .copy { grid-area: 1 / 1 / 2 / 2; align-self: end; font-size: 1rem; line-height: 1.7; }
+.card-big .tags { grid-area: 2 / 1 / 3 / 2; }
+.card-big .tag { font-size: .78rem; padding: 0 7px; border-color: #F7F2E6; color: #F7F2E6; }
+.card-big .tag-sp { background: #F7F2E6; color: var(--felt); }
+.play {
+  grid-area: 3 / 1 / 4 / 2; justify-self: start; display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 6px 22px; background: var(--red); color: #fff;
+  font-family: var(--fude); font-size: 1.15rem; letter-spacing: .12em;
+  box-shadow: inset 0 0 0 2px var(--red), inset 0 0 0 3px rgba(255,255,255,.75), 0 2px 0 rgba(0,0,0,.3);
+}
+
+/* ===== しらべる：開いた図鑑（左＝表紙や木札、右＝頁。下と右に頁の重なりで厚み） ===== */
+.refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 24px 20px; padding: 0 4px 4px 0; }
+.ref {
+  display: grid; grid-template-columns: 100px 1fr; min-height: 44px;
+  background-color: var(--kinari); background-image: var(--fiber), var(--grain);
+  background-size: 260px 260px, 180px 180px;
+  border: 1px solid rgba(0,0,0,.5);
+  box-shadow: 2px 2px 0 -1px #F3EBD6, 2px 2px 0 0 rgba(0,0,0,.3), 4px 4px 0 -1px #E8DCC0, 4px 4px 0 0 rgba(0,0,0,.28);
+  color: var(--ink); text-decoration: none;
+}
+.ref:hover, .ref:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+.ref .face { height: auto; min-height: 140px; border: 0; box-shadow: none; }
+.leaf {
+  display: flex; flex-direction: column; gap: 6px; padding: 10px 12px 10px 14px;
+  border-left: 1px solid rgba(0,0,0,.5);
+  background-image: linear-gradient(90deg, rgba(90,60,20,.12), transparent 14px); /* 綴じ目の影 */
+}
+.leaf .copy { font-size: .88rem; line-height: 1.65; }
+.src { margin-top: auto; padding-top: 6px; border-top: 1px dotted rgba(0,0,0,.3); font-size: .72rem; line-height: 1.55; color: var(--muted); }
+
+/* 醸造百選 ビューア：藍の表紙の和綴じ本（右に四つ目綴じ・左上に題簽） */
+.k-book .face {
+  background-color: #26386A; --fib: var(--fiber-l); place-items: start;
+  --motif:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='140' viewBox='0 0 22 140' preserveAspectRatio='none'><path d='M7 0V140' stroke='%23000' stroke-opacity='.3'/><path d='M8 22V118M8 22H22M8 54H22M8 86H22M8 118H22' stroke='%23F3EAD3' stroke-width='1.6' fill='none'/><g fill='%230b1238'><circle cx='8' cy='22' r='1.8'/><circle cx='8' cy='54' r='1.8'/><circle cx='8' cy='86' r='1.8'/><circle cx='8' cy='118' r='1.8'/></g></svg>"),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 4px);
+  --msize: 22px 100%, auto; --mpos: 100% 0, 0 0; --mrep: no-repeat, repeat;
+}
+.k-book .name {
+  margin: 12px 0 0 14px; padding: 10px 6px;
+  background-color: var(--kinari); background-image: var(--fiber);
+  border: 1px solid rgba(0,0,0,.5); box-shadow: inset 0 0 0 3px var(--kinari), inset 0 0 0 4px rgba(193,57,44,.6), 1px 2px 0 rgba(0,0,0,.25);
+}
+.k-book .main { font-size: 1.35rem; }
+.k-book .sub { font-size: .9rem; color: var(--muted); padding-top: 18px; }
+
+/* 酒米の系図：上が欠けた木札（木目）・頭に赤と紺の┬。頁の左に掛けた札 */
+.k-keizu .face {
+  width: 72px; min-height: 124px; margin: 8px auto; justify-self: center;
+  clip-path: polygon(18% 0, 82% 0, 100% 12%, 100% 100%, 0 100%, 0 12%);
+  background-color: #DDBB86; place-items: end center;
+  --motif:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='14'><path d='M5 4H25M15 4V13' stroke='%23232220' stroke-width='1.2' fill='none'/><circle cx='5' cy='4' r='3.4' fill='%23C1392C'/><circle cx='25' cy='4' r='3.4' fill='%2310165B'/></svg>"),
+    repeating-linear-gradient(90deg, rgba(110,70,30,.12) 0 1px, transparent 1px 6px, rgba(110,70,30,.07) 6px 7px, transparent 7px 13px);
+  --msize: 30px 14px, auto; --mpos: 50% 7px, 0 0; --mrep: no-repeat, repeat;
+}
+.k-keizu .name { margin-bottom: 8px; font-size: 1.2rem; letter-spacing: 0; color: #3a2414; }
+
+/* 全国新酒鑑評会の札（k-kanpyo）は載せない間は外した。戻すときは design/b2.html から写す */
+
+/* 酒縁結び：七宝つなぎの地紋に水引の結び（名前は右寄せで水引と重ねない） */
+.k-en .face {
+  --rule: rgba(193,57,44,.45);
+  --motif:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='46'><g fill='none' stroke-linecap='round'><g stroke='%23C1392C' stroke-width='4'><circle cx='20' cy='22' r='9'/><circle cx='36' cy='22' r='9'/><circle cx='28' cy='12' r='7.5'/><path d='M21 31 10 43M35 31 46 43'/></g><g stroke='%23FBF6E9' stroke-width='1.1'><circle cx='20' cy='22' r='9'/><circle cx='36' cy='22' r='9'/><circle cx='28' cy='12' r='7.5'/><path d='M21 31 10 43M35 31 46 43'/></g></g></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><g fill='none' stroke='%23C1392C' stroke-opacity='.16'><circle cx='10' cy='10' r='10'/><circle cx='0' cy='0' r='10'/><circle cx='20' cy='0' r='10'/><circle cx='0' cy='20' r='10'/><circle cx='20' cy='20' r='10'/></g></svg>");
+  --msize: 56px 46px, 20px 20px; --mpos: 6px calc(100% - 6px), 0 0; --mrep: no-repeat, repeat;
+}
+.k-en .name { justify-self: end; margin-right: 10px; font-size: 1.3rem; color: var(--navy); padding: 6px 3px; background: var(--kinari); box-shadow: 0 0 0 5px var(--kinari); }
 
 /* 紹介と共有 */
 .about p { margin: 0 0 16px; }
-.share { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+.share { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
 .share-ttl { font-weight: 700; margin: 0 0 10px; }
 .share-btns { display: flex; flex-wrap: wrap; gap: 10px; }
 .copied { min-height: 1.5em; font-size: .85rem; color: var(--muted); margin: 8px 0 0; }
 
 /* フッター */
-.site-foot { background: var(--navy); color: var(--white); text-align: center; padding: 24px 16px 32px; }
+.site-foot { background: var(--navy); color: #fff; text-align: center; padding: 24px 16px 32px; }
 .site-foot p { margin: 0 0 8px; font-size: .88rem; }
-.site-foot a { color: var(--white); }
+.site-foot a { color: #fff; display: inline-block; padding: 12px 8px; } /* 指で押せる高さに */
 .legal { font-weight: 700; }
