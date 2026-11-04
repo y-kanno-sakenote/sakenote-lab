@@ -227,6 +227,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   <p class="rank" id="oRank"></p>
   <p id="oBestRow">最高 <span id="oBest">0</span></p>
   <button id="again">もう一度</button>
+  <button id="share" class="link" type="button">Xで共有</button>
   <button id="toTop" class="link" type="button">トップへ</button>
 </div></div>
 
@@ -955,7 +956,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   var state, aimX = C.W / 2, scale = 1, dpr = 1, ended = false, shownScore = -1;
 
   function start() {
-    state = D.create(); ended = false; aimX = C.W / 2; shownScore = -1; lastNext = -1;
+    state = D.create(); ended = false; aimX = C.W / 2; shownScore = -1; lastNext = -1; maxTier = -1;
     over.classList.remove('on');
   }
 
@@ -1086,6 +1087,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   cv.addEventListener('pointerup', release);
   cv.addEventListener('pointercancel', function () { pressing = false; });
   document.getElementById('again').addEventListener('click', start);
+  // Xで共有：投稿の下書きを新しいタブで開くだけ（ゲームからは通信しない）
+  var maxTier = -1;
+  document.getElementById('share').addEventListener('click', function () {
+    var text = (freshRank === 0 ? '自己ベスト！ ' : '') + fmt(state.score) + '点。' +
+      (maxTier >= 0 ? C.NAMES[maxTier] + 'まで育てた。' : '') + '\n#酒器おとし';
+    window.open('https://x.com/intent/post?text=' + encodeURIComponent(text) +
+      '&url=' + encodeURIComponent('https://lab.sakenote.net/sakedrop/'), '_blank', 'noopener');
+  });
   document.getElementById('toTop').addEventListener('click', showTop);
   document.getElementById('tGo').addEventListener('click', function () {
     document.body.classList.remove('top'); mode = 'play'; start(); fit();
@@ -1099,6 +1108,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     if (mode === 'top') { last = 0; requestAnimationFrame(loop); return; }
     var dt = last ? (now - last) / 1000 : 0; last = now;
     D.step(state, dt);
+    for (var bi = 0; bi < state.bodies.length; bi++) if (state.bodies[bi].tier > maxTier) maxTier = state.bodies[bi].tier;  // 共有の文に使う（杉玉・酔っ払いは負の番号）
     if (state.score !== shownScore) { shownScore = state.score; elScore.textContent = fmt(state.score); }
     var nk = state.drops * 100 + (state.next + 2);
     if (nk !== lastNext) { lastNext = nk; renderNext(); }
