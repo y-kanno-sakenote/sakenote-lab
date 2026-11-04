@@ -12,79 +12,54 @@
 <meta property="og:description" content="醸造とお酒の専門家がつくったものを、ひとつずつ並べます。">
 <meta property="og:url" content="https://lab.sakenote.net/">
 <meta property="og:image" content="https://lab.sakenote.net/img/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Shippori+Mincho+B1:wght@800&family=Yuji+Syuku&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="site-head">
-  <a class="back" href="https://sakenote.net/">‹ <img src="img/logo-sakenote.svg" alt="合同会社サケノテ" width="150" height="28"></a>
+<header class="head">
+  <a href="https://sakenote.net/"><img src="img/logo-sakenote.svg" alt="合同会社サケノテ" width="150" height="28"></a>
 </header>
 
 <main>
-
 <section class="hero">
   <h1 class="sr">SAKENOTE LAB　さわる。あそぶ。まなぶ。</h1>
   <img class="noren" src="img/art/label_top.webp" alt="" width="800" height="600">
 </section>
 
-<section id="asobu" class="block">
-  <h2><span class="en">PLAY</span>あそぶ</h2>
-  <div class="cards">
-    <a class="card" href="sakedrop/">
-      <span class="art"><img src="img/art/label_sakedrop.jpg" alt="酒器おとし" width="480" height="640" loading="lazy"></span>
+<div class="corners">
+<section class="corner">
+  <h2>あそぶ。</h2>
+  <div class="shelf">
+    <a class="work" href="sakedrop/">
+      <img src="img/art/label_sakedrop.jpg" alt="酒器おとし" width="480" height="640" loading="lazy">
       <span class="obi">同じ酒器をくっつけて、<br>お猪口から菰樽へ。</span>
     </a>
   </div>
 </section>
 
-<section id="shiraberu" class="block block-dark">
-  <h2><span class="en">LEARN</span>しらべる</h2>
-  <div class="cards">
-    <a class="card" href="jozo100/">
-      <span class="art"><img src="img/art/label_jozo100.jpg" alt="醸造百選 ビューア" width="480" height="640" loading="lazy"></span>
+<section class="corner">
+  <h2>まなぶ。</h2>
+  <div class="shelf">
+    <a class="work" href="jozo100/">
+      <img src="img/art/label_jozo100.jpg" alt="醸造百選 ビューア" width="480" height="640" loading="lazy">
       <span class="obi">百選の品を、<br>県の地図と50音で探す。</span>
     </a>
   </div>
 </section>
-
-<section class="block about">
-  <h2><span class="en">ABOUT</span>サケノテについて</h2>
-  <p>合同会社サケノテは、日本酒業界に特化した会社です。コンサルティングや商品開発のお手伝い、日本酒の魅力の発信をしています。ここに並べるのは、醸造の知識を形にしたものです。</p>
-
-  <div class="share">
-    <p class="share-ttl">このページを送る</p>
-    <div class="share-btns">
-      <a class="btn btn-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Flab.sakenote.net%2F">LINE</a>
-      <a class="btn btn-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flab.sakenote.net%2F&amp;text=SAKENOTE%20LAB%EF%BD%9C%E5%90%88%E5%90%8C%E4%BC%9A%E7%A4%BE%E3%82%B5%E3%82%B1%E3%83%8E%E3%83%86">X</a>
-      <button class="btn" type="button" id="copy" data-url="https://lab.sakenote.net/">リンクをコピー</button>
-    </div>
-    <p class="copied" id="copied" role="status" aria-live="polite"></p>
-  </div>
-</section>
-
+</div>
 </main>
 
-<footer class="site-foot">
-  <p class="legal">20歳未満の飲酒は法律で禁止されています</p>
-  <p><a href="https://sakenote.net/">‹ 合同会社サケノテ</a></p>
+<footer class="foot">
+  <a href="https://sakenote.net/">合同会社サケノテ</a>
+  <p>20歳未満の飲酒は法律で禁止されています</p>
 </footer>
 
-<script>
-(function () {
-  var b = document.getElementById('copy'), m = document.getElementById('copied');
-  b.addEventListener('click', function () {
-    var u = b.getAttribute('data-url');
-    function done(ok) { m.textContent = ok ? 'コピーしました' : u; }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(u).then(function () { done(true); }, function () { done(false); });
-    } else { done(false); }
-  });
-})();
-</script>
 </body>
 </html>

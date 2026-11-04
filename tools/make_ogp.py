@@ -1,21 +1,16 @@
-"""共有カード img/ogp.png（1200x630）を作る。文言を変えたらこれを再実行する。"""
-from PIL import Image, ImageDraw, ImageFont
+"""共有カード img/ogp.png（1200x630）を作る。ページと同じ生成りの地に暖簾の絵だけ。暖簾の絵を替えたらこれを再実行する。"""
+from PIL import Image
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RED, NAVY, INK, GRAY = (193, 57, 44), (16, 22, 91), (37, 37, 37), (242, 242, 242)
-BOLD = "/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc"
-MID = "/System/Library/Fonts/ヒラギノ角ゴシック W5.ttc"
+BG = (243, 239, 230)  # style.css の --bg
+W, H, PAD = 1200, 630, 40
 
-img = Image.new("RGB", (1200, 630), (255, 255, 255))
-d = ImageDraw.Draw(img)
-d.rectangle([0, 0, 1200, 14], fill=RED)
-d.rectangle([0, 560, 1200, 630], fill=NAVY)
-d.text((80, 90), "SAKENOTE LAB", font=ImageFont.truetype(BOLD, 34), fill=RED)
-f = ImageFont.truetype(BOLD, 96)
-# index.html の見出しと同じ文
-for i, line in enumerate(["さわる。", "あそぶ。", "まなぶ。"]):
-    d.text((80, 160 + i * 120), line, font=f, fill=NAVY)
-d.text((80, 578), "合同会社サケノテ", font=ImageFont.truetype(BOLD, 30), fill=(255, 255, 255))
+noren = Image.open(ROOT / "img" / "art" / "label_top.webp").convert("RGBA")
+scale = min((W - PAD * 2) / noren.width, (H - PAD * 2) / noren.height)
+noren = noren.resize((round(noren.width * scale), round(noren.height * scale)), Image.LANCZOS)
+
+img = Image.new("RGB", (W, H), BG)
+img.paste(noren, ((W - noren.width) // 2, (H - noren.height) // 2), noren)
 img.save(ROOT / "img" / "ogp.png", optimize=True)
 print("img/ogp.png")
