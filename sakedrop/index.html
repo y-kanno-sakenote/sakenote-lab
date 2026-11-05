@@ -1068,7 +1068,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     // 狙い（落とせるときだけ）
     if (!state.over && D.canDrop(state)) {
       var x = D.clampX(state.current, aimX), r = D.radiusOf(state.current);
-      g.strokeStyle = 'rgba(120,100,80,0.25)'; g.lineWidth = 1;
+      g.strokeStyle = 'rgba(255,240,215,0.5)'; g.lineWidth = 2;   // 11-05 友人の試遊「落ちる場所の線が薄い」：茶 0.25・1px → 生成り 0.5・2px（上の破線と同じ色で実線）
       g.beginPath(); g.moveTo(x, C.DROP_Y + r); g.lineTo(x, C.H); g.stroke();
       drawPiece(g, state.current, x, C.DROP_Y, r, 0.9);
     }
